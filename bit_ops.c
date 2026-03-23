@@ -34,6 +34,7 @@ void printfubin(uint8_t b)
 		r1 = r2;
 	}
 	printf("%s\n", bits->s);
+	str_free(bits);
 }
 
 int main(int argc, char **argv)
