@@ -11,13 +11,14 @@
 #define	BIT_OFF	'0'
 #define BIT_ON '1'
 #define BYTE_LEN 8
-
+#define BYTE_LITERAL "00000000"
 typedef struct string {
 	char* s;
 	int len;
 } string;
 
 string *str_init(char *a);
+void str_free(string *s);
 int str_append(string *s1, string *s2);
 
 int ipow(int base, int n);

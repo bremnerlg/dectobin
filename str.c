@@ -24,11 +24,10 @@ string *str_init(char *a)
 /* deconstruct the string structure and ensure all heap is deallocated */
 void str_free(string *str)
 {
-	if (str == NULL)
-		return;
-
-	free(str->s);
-	free(str);
+	if (str->s)
+		free(str->s);
+	if (str)
+		free(str);
 }	
 
 int str_append(string *s1, string *s2)
@@ -41,8 +40,12 @@ int str_append(string *s1, string *s2)
 	s1->len += s2->len;
 	s1->s = (char*)realloc(s1->s, (sizeof(char) * s1->len));
 
-	for (i = s2->len, n = 0; i < s1->len; i++, n++) 
-		s1[i] = s2[n];
+	i = s2->len;
+	n = 0;
+
+	while (s1->s[i++] = s2->s[n++]);
+
+	printf("s[LAST] = %d\n", s1->s[i]);
 		
 	return 0;
 }

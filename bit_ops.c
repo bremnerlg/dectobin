@@ -19,27 +19,31 @@ int ipow(int base, int n)
 }
 
 
-void printfbin(int8_t b)
+void printfubin(uint8_t b)
 {
-	int8_t r1, r2;
+	uint8_t r1, r2;
+
+	string *bits = str_init(BYTE_LITERAL);
+//	printf("string *bits: %s\n", bits->s);
 	r1 = r2 = b;
-	for (int i = (sizeof(b) - 1); i >= 0; --i) {
-		r2 %= ipow(2, i);
-		if (r2 == r1)
-			putchar(BIT_OFF);
-		else {
-			r1 = r2;
-			putchar(BIT_ON);
-		}
-	} 
-	putchar('\n');
+	for (int i = 1; i <= BYTE_LEN; ++i) {
+		r2 %= ipow(2, (BYTE_LEN - i));
+//		printf("r2 %= %d: %d\n", ipow(2, (BYTE_LEN - i)), r2);
+		if (r2 < r1)
+			bits->s[i - 1] = BIT_ON;
+		r1 = r2;
+	}
+	printf("%s\n", bits->s);
 }
 
-int main()
+int main(int argc, char **argv)
 {
-	string *test = str_init("Hello World!");
-	printf("string library test: %s\n", test->s);
-	printf("test->len: %d\n", test->len);
-}	
-			
-						
+	
+	char *s = &argv[1][0];
+//	printf("*s: %s\n", s);
+	int x = atoi(s);
+	printf("%d in binary: ", x);
+	
+	printfubin(x);
+
+}
